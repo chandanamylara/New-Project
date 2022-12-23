@@ -1,0 +1,89 @@
+import numpy as np
+import pandas as pd
+df=pd.read_csv('D:/diamonds.csv')
+df
+
+import numpy as np
+import pandas as pd
+user_cols=['carat','cut','x','y','z']
+df=pd.read_csv('D:/diamonds.csv')
+print(df[user_cols].head(6))
+
+print(df['carat'])
+
+df['Quality -color']=df.cut+','+df.color
+print(df.head())
+
+print('original dataframe')
+print(df.head())
+print('after remaning 2 columns')
+df.rename(columns={'color':'diamond_color','clarity':'diamond_clarity'},inplace=True)
+print(df.head())
+
+df.drop('cut',axis=1,inplace=True)
+print(df.head())
+
+df.drop(['carat','y'],axis=1,inplace=True)
+print(df.head())
+
+df.drop([2,4,5],axis=0,inplace=True)
+print(df)
+
+result=df.price.sort_values(ascending =False)
+print(result)
+
+df=pd.read_csv('D:/diamonds.csv')
+result= df.sort_values('cut',ascending=False)
+print(result)
+
+print("rows to only show carat weight  at least 0.3")
+booleans=[]
+for w in df.carat:
+    if w>=0.3:
+        booleans.append(True)
+    else:
+        booleans.append(False)
+        
+print(booleans[0:20])
+        
+
+
+result=df[df.cut.isin(['Fair','Good','Premium'])]
+print(result.head())
+
+result=df[(df.x>5)&(df.y>5)&(df.z>5)]
+print(result.head())
+
+result=pd.read_csv('D:/diamonds.csv',nrows=3)
+print(result.head())
+
+for index,row in df.iterrows():
+    print(index,row.carat,row.cut,row.color,row.price)
+
+print(df.mean())
+
+print(df.groupby('cut').price.mean())
+
+print(df.groupby('cut').price.agg(['count','min','max']))
+
+
+print(df.isnull().sum())
+
+print(df.carat.value_counts().index)
+print(df.carat.value_counts().values)
+
+print(df.loc[0:2,['color','price']])
+
+print(df.loc[df.cut=='premium','color'])
+
+print(df.shape)
+print(df.clarity.duplicated().sum())
+
+print(df.duplicated().sum())
+
+print(df.dropna(how='any').shape)
+
+print(df.carat.describe())
+
+print(pd.concat([df,df.color],axis=1).head())
+
