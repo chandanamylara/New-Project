@@ -1,0 +1,20 @@
+import numpy as np
+import pandas as pd
+
+cols=['symboling','normalized-losses','make3','fuel-type','aspiration','num-of-doors']
+data=pd.read_csv("C:/Users/Admin/Downloads/archive (21)/data.csv")
+print(data.shape)
+data.head()
+
+data = data.replace("?",np.NaN)
+data.head()
+
+data.isnull().any().any()
+
+data.isnull().sum()
+
+avg_Price = data['Price'].astype("float").mean()
+avg_Price
+
+data['Price'].replace(np.NaN,avg_Price,inplace= True)
+data['Price']
