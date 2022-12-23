@@ -1,0 +1,328 @@
+# Import libraries
+from matplotlib import pyplot as plt
+import numpy as np
+ 
+ 
+# Creating dataset
+cars = ['AUDI', 'BMW', 'FORD',
+        'TESLA', 'JAGUAR', 'MERCEDES']
+ 
+data = [23, 17, 35, 29, 12, 41]
+ 
+# Creating plot
+fig = plt.figure(figsize =(10, 7))
+plt.pie(data, labels = cars)
+ 
+# show plot
+plt.show()
+
+# Import libraries
+import numpy as np
+import matplotlib.pyplot as plt
+ 
+ 
+# Creating dataset
+cars = ['AUDI', 'BMW', 'FORD',
+        'TESLA', 'JAGUAR', 'MERCEDES']
+ 
+data = [23, 17, 35, 29, 12, 41]
+ 
+ 
+# Creating explode data
+explode = (0.1, 0.0, 0.2, 0.3, 0.0, 0.0)
+ 
+# Creating color parameters
+colors = ( "orange", "cyan", "brown",
+          "grey", "indigo", "beige")
+ 
+# Wedge properties
+wp = { 'linewidth' : 1, 'edgecolor' : "green" }
+ 
+# Creating autocpt arguments
+def func(pct, allvalues):
+    absolute = int(pct / 100.*np.sum(allvalues))
+    return "{:.1f}%\n({:d} g)".format(pct, absolute)
+ 
+# Creating plot
+fig, ax = plt.subplots(figsize =(10, 7))
+wedges, texts, autotexts = ax.pie(data,
+                                  autopct = lambda pct: func(pct, data),
+                                  explode = explode,
+                                  labels = cars,
+                                  shadow = True,
+                                  colors = colors,
+                                  startangle = 90,
+                                  wedgeprops = wp,
+                                  textprops = dict(color ="magenta"))
+ 
+# Adding legend
+ax.legend(wedges, cars,
+          title ="Cars",
+          loc ="center left",
+          bbox_to_anchor =(1, 0, 0.5, 1))
+ 
+plt.setp(autotexts, size = 8, weight ="bold")
+ax.set_title("Customizing pie chart")
+ 
+# show plot
+plt.show()
+
+# Import libraries
+from matplotlib import pyplot as plt
+import numpy as np
+
+
+# Creating dataset
+size = 6
+cars = ['AUDI', 'BMW', 'FORD',
+'TESLA', 'JAGUAR', 'MERCEDES']
+
+data = np.array([[23, 16], [17, 23],
+[35, 11], [29, 33],
+[12, 27], [41, 42]])
+
+# normalizing data to 2 pi
+norm = data / np.sum(data)*2 * np.pi
+
+# obtaining ordinates of bar edges
+left = np.cumsum(np.append(0,
+norm.flatten()[:-1])).reshape(data.shape)
+
+# Creating color scale
+cmap = plt.get_cmap("tab20c")
+outer_colors = cmap(np.arange(6)*4)
+inner_colors = cmap(np.array([1, 2, 5, 6, 9,
+10, 12, 13, 15,
+17, 18, 20 ]))
+
+# Creating plot
+fig, ax = plt.subplots(figsize =(10, 7),
+subplot_kw = dict(polar = True))
+
+ax.bar(x = left[:, 0],
+width = norm.sum(axis = 1),
+bottom = 1-size,
+height = size,
+color = outer_colors,
+edgecolor ='w',
+linewidth = 1,
+align ="edge")
+
+ax.bar(x = left.flatten(),
+width = norm.flatten(),
+bottom = 1-2 * size,
+height = size,
+color = inner_colors,
+edgecolor ='w',
+linewidth = 1,
+align ="edge")
+
+ax.set(title ="Nested pie chart")
+ax.set_axis_off()
+
+# show plot
+plt.show()
+
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+df=pd.read_csv("C:/Users/CSE WPT/Downloads/archive(1)/Cars93.csv")  
+df.head()
+
+from matplotlib import pyplot as plt
+import pandas as pd
+df=pd.read_csv("C:/Users/CSE WPT/Downloads/archive(1)/Cars93.csv")
+cars=['BMW']
+
+df['Price'].plot(kind="bar")
+
+plt.title("Cars")
+plt.legend()
+
+
+from matplotlib import pyplot as plt
+import pandas as pd
+df=pd.read_csv("C:/Users/CSE WPT/Downloads/archive(1)/Cars93.csv")
+cars=['BMW']
+fig, (ax1, ax2) =plt.subplots(1,2)
+ax1.boxplot(df["MPG.highway"])
+ax2.boxplot(df["Price"])
+
+
+plt.title("Cars")
+
+
+from matplotlib import pyplot as plt
+import pandas as pd
+df=pd.read_csv("C:/Users/CSE WPT/Downloads/archive(1)/Cars93.csv")
+w=df['Weight']
+p=df['Price']
+plt.title('price')
+plt.pie(w,autopct='0.5')
+plt.show()
+
+
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+df=pd.read_csv("C:/Users/CSE WPT/Downloads/archive(1)/Cars93.csv")
+df.set_index('Manufacturer',inplace=True)
+df.head()
+
+df=df.loc['BMW']
+df
+
+df_component=df['Price' : "MPG.city"]
+df_component
+
+df_component.plot(kind='pie')
+
+import numpy as np
+import scipy.stats
+import pandas as pd
+
+dummy_age = [20,21,24,24,28,26,19,22,26,24,21,
+          19,22,28,29,6,100,25,25,28,31]
+dummy_height = [150,151,155,153,280,160,158,157,158,145,150,
+             155,155,151,152,153,160,152,157,157,160,153]
+dummy_df = pd.DataFrame(list(zip(dummy_age,dummy_height)),
+                      columns=['Age','Height(cm)'])
+
+dummy_df
+
+# calculate z-score using scipy.stats.zscore
+
+scipy.stats.zscore(dummy_df)
+
+scipy.stats.zscore(dummy_df['Height(cm)'])
+
+### We can also use absolute values while calculating z_score
+
+z_score_height = np.abs(scipy.stats.zscore(dummy_df['Height(cm)']))
+dummy_df.iloc[np.where(z_score_height>4)]
+
+## Lets see if Z-score works for Age as well
+
+z_score_age = np.abs(scipy.stats.zscore(dummy_df['Age']))
+dummy_df.iloc[np.where(z_score_age>4)]
+
+import numpy as np
+import scipy.stats
+import pandas as pd
+
+dummy_age = [20,21,24,24,28,26,19,22,26,24,21,
+          19,22,28,29,6,100,25,25,28,31]
+dummy_height = [150,151,155,153,280,160,158,157,158,145,150,
+             155,155,151,152,153,160,152,157,157,160,153]
+dummy_df = pd.DataFrame(list(zip(dummy_age,dummy_height)),
+                      columns=['Age','Height(cm)'])
+
+dummy_df
+
+def modified_z_score(my_data):
+    # First calculate Median
+    median_my_data = np.median(my_data)
+    
+    #Median absolute deviation
+    mad = np.median(my_data.map(lambda x: np.abs(x - median_my_data)))
+    
+    #Modified Z score
+    modified_z_score=list(my_data.map(lambda x: 0.6745* (x - median_my_data)/mad))
+    return modified_z_score 
+
+modified_z_score(dummy_df['Age'])
+
+mod_z_score_height = modified_z_score(dummy_df['Age'])
+dummy_df.iloc[np.where(np.abs(mod_z_score_height)>=3)]
+
+mod_z_score_height = modified_z_score(dummy_df['Height(cm)'])
+dummy_df.iloc[np.where(np.abs(mod_z_score_height)>=3)]
+
+import numpy as np
+import scipy.stats
+import pandas as pd
+
+dummy_age = [20,21,24,24,28,26,19,22,26,24,21,
+          19,22,28,29,6,100,25,25,28,31]
+dummy_height = [150,151,155,153,280,160,158,157,158,145,150,
+             155,155,151,152,153,160,152,157,157,160,153]
+dummy_df = pd.DataFrame(list(zip(dummy_age,dummy_height)),
+                      columns=['Age','Height(cm)'])
+
+dummy_df
+
+def get_lower_upper_bound(my_data):
+    q1 = np.percentile(my_data, 25)
+    q3 = np.percentile(my_data, 75)
+    iqr = q3 - q1
+    lower_bound = q1 - (iqr * 1.5)
+    upper_bound = q2 + (iqr * 1.5)
+    return lower_bound, upper_bound
+
+def get_outliers_iqr(my_data):
+    lower_bound, upper_bound = get_lower_upper_bound(my_data)
+    return my_data(np.where(my_data > upper_bound) | 
+                           (my_data < lower_bound))
+
+
+get_outliers_iqr(dummy_df['Age'])
+
+import numpy as np
+import pylab as p1
+from sklearn import datasets
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.metrics import mean_squared_error,median_absolute_error,r2_score,
+
+
+# implementation of Hyper parameter tuning using GridSearchCV
+
+import pandas as pd
+import warnings
+warnings.filterwarnings('ignore')
+from sklearn.datasets import load_breast_cancer
+cancer_data = load_breast_cancer()
+
+cancer_df = pd.DataFrame(cancer_data.data,columns=cancer_data.feature_names)
+
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train,y_test = train_test_split(cancer_df,
+                                          cancer_data.target,
+                                          test_size = 0.33,
+                                          random_state = 42)
+
+from sklearn.tree import DecisionTreeClassifier
+from sklearn import metrics
+
+# Create Decision Tree Classifier object
+dtc = DecisionTreeClassifier()
+
+# Train tree decision classifier
+dtc.fit(x_train,y_train)
+
+param_dict = {
+"criterion":['gini','entropy'],
+    "max_depth":range(1,10),
+    "min_samples_split":range(1,10),
+    "min_samples_leaf":range(1,5)
+}
+
+from sklearn.model_selection import GridSearchCV
+grid = GridSearchCV(dtc,
+                   param_grid=param_dict,
+                   cv=10,
+                   verbose=1,
+                   n_jobs=-1)
+grid.fit(x_train,y_train)
+
+grid.best_params_
+
+grid.best_estimator_
+
+grid.best_score_
+
+import matplotlib.pyplot as plt
+import pandas as pd
+% matplotlib inline
+
