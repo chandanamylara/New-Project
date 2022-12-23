@@ -1,0 +1,51 @@
+import  pandas as pd
+import datetime as dt
+df= pd.read_excel("C:/Users/CSE WPT/Documents/AIML/pivot table.xlsx/pivot table.xlsx")
+print(df)
+
+df1=df.pivot(index="Row ID",columns="Order Date",values="Sales")
+df1.head()
+
+print(df)
+
+import  pandas as pd
+import datetime as dt
+df= pd.read_excel("C:/Users/CSE WPT/Desktop/VARSHINI XLSX/INTERNALS OF 4TH SEM.XLSX")
+print(df)
+
+df1=df.pivot(index="NAME",columns="INTERNALS",values="MARKS")
+print(df1)
+
+import pandas as pd
+
+
+df = pd.DataFrame(data = {
+    'Day' : ['MON', 'TUE', 'WED', 'THU', 'FRI'], 
+    'Google' : [1129,1132,1134,1152,1152],
+    'Baz' : [1,2,3,4,5],
+    'Apple' : [191,192,190,190,188]
+})
+print(df)
+
+df.pivot(index='Apple', columns='Day', values='Google')
+
+df.pivot(index='Day', columns='Google')['Baz']
+
+df.pivot(index="Apple",columns="Baz", values=["Google", "Day"])
+
+reshaped_df=df.melt(id_vars=['Variables'])
+print(reshaped_df)
+
+import pandas as pd
+df = pd.DataFrame(data = {
+    'Day' : ['MON', 'TUE', 'WED', 'THU', 'FRI', 'MON', 'TUE', 'WED', 'THU', 'FRI'], 
+    'Variable' : ["Apple","Apple","Apple","Apple","Apple","Google","Google","Google","Google","Google"],
+    'Values' : [191,192,190,190,188,194,198,567,789,673]
+})
+print(df)
+
+reshaped_df = df.melt(id_vars=['Day'], var_name='Company', value_name='Closing Price')
+print(reshaped_df)
+
+
+
