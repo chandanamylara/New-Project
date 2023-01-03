@@ -1,0 +1,21 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seborn as sns
+
+dataset = pd.read_csv("C:/Users/CSE WPT/Downloads/archive (8)/Advertising.csv")
+
+dataset.head()
+
+dataset.shape
+
+dataset.isna().sum()
+
+dataset.duplicated().any()
+
+fig,axs = plt.subplots(3, figsize = (5,5))
+plt1 = sns.boxplot(dataset['TV'], ax = axs[0])
+plt2 = sns.boxplot(dataset['Newspaper'], ax = axs[1])
+plt3 = sns.boxplot(dataset['Radio'], ax = axs[2])
+plt.tight_layout()
+
