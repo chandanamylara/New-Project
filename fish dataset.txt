@@ -1,0 +1,27 @@
+from sklearn.svm import SVC
+from sklearn.model_selection import train_test_split
+import pandas as pd
+df=pd.read_csv('D:/Fish.csv')
+df
+
+x=df.drop("Species",axis=1)
+y=df['Species']
+
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=42)
+
+model=SVC()
+
+model.fit(x_train,y_train)
+
+predictions=model.predict(x_test)
+from sklearn.metrics import classification_report
+report=classification_report(y_test,predictions)
+print(report)
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+import pandas as pd
+
+
+data=pd.read_csv('D:/Fish.csv')
+data
