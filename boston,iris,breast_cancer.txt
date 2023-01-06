@@ -1,0 +1,105 @@
+import pandas as pd
+import numpy as np
+from sklearn.datasets import load_boston
+from sklearn.datasets import load_breast_cancer
+from sklearn.datasets import load_iris
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import precision_score
+from sklearn.metrics import accuracy_score
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestClassifier
+from sklearn import tree
+from sklearn.svm import SVC
+
+from sklearn import tree
+X=[[2],[5],[8],[12],[15]]
+Y=[60,70,80,90,99]
+std=tree.DecisionTreeRegressor()
+std.fit(X,Y)
+score= std.predict([[10]])
+score
+
+bostondata=load_boston()
+bostondata
+
+df=pd.DataFrame(bostondata.data,columns=bostondata.feature_names)
+df
+
+df["PRICE"]=bostondata.target
+df
+
+x=df.drop('PRICE',axis=1)
+y=df['PRICE']
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3,random_state=5)
+
+lm=LinearRegression()
+lm
+
+lm.fit(x_train,y_train)
+accuracy=lm.score(x_test,y_test)
+accuracy
+
+model = RandomForestRegressor()
+model.fit(x_train,y_train)
+accuracy=lm.score(x_test,y_test)
+accuracy
+
+cancer = load_breast_cancer()
+X=cancer["data"]
+Y=cancer["target"]
+
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.3,random_state=45)
+
+model=RandomForestClassifier()
+
+model.fit(X_train,Y_train)
+
+predictions=model.predict(X_test)
+
+accuracy=model.score(X_test,Y_test)
+print("Accuracy:%.2f"%accuracy)
+
+iris=load_iris()
+X=iris["data"]
+Y=iris["target"]
+
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=42)
+
+model=SVC()
+
+model.fit(X_train,Y_train)
+
+predictions=model.predict(X_test)
+
+accuracy=model.score(X_test,Y_test)
+accuracy
+
+iris=load_iris()
+x=iris["data"]
+y=iris["target"]
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3)
+model=LinearRegression()
+model.fit(x_train,y_train)
+accuracy=model.score(x_test,y_test)
+accuracy
+
+pdf=pd.read_csv("C:/Users/CSE WPT/Downloads/archive (17)/odb.csv")
+pdf
+
+p1df=pdf.drop(columns='Span',axis=1)
+
+p1df=pdf.drop(columns='HS',axis=1)
+
+p1df=pdf.drop(columns='6s',axis=1)
+
+p1df=pdf.drop(columns='4s',axis=1)
+
+p1df.info()
+
+p1df.groupby('Player').mean()
+
+x=p1df.drop(columns='Player',axis=1)
+y=p1df['Player']
+
