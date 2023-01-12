@@ -1,0 +1,37 @@
+import pandas as pd 
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import confusion_matrix
+from sklearn.preprocessing import LabelEncoder
+
+data=pd.read_csv("D:/AIML/apples_and_oranges.csv")
+print(data)
+
+import seaborn as sns
+sns.scatterplot(x="Weight",
+               y="Size",
+               hue="Class",
+               data=data)
+
+training_set,test_set=train_test_split(data,test_size=0.2,random_state=1)
+print("train:",training_set)
+print("test:",test_set)
+
+x_train=training_set.iloc[:,0:2].values
+y_train=training_set.iloc[:,2].values
+x_test=test_set.iloc[:,0:2].values
+y_test=test_set.iloc[:,2].values
+print(x_train,y_train)
+print(x_test,y_test)
+
+classifier=SVC(kernel='rbf',random_state=1,C=1,gamma='auto')
+classifier.fit(x_train,y_train)
+
+y_pred=classifier.predict(x_test)
+print(y_pred)
+
+cm=confusion_matrix(y_test,y_pred)
+print(cm)
+accuracy=float(cm.diagonal().sum())/len(y_test)
+print('model accuracy is:',accuracy*100,'%')
+
