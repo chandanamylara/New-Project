@@ -1,0 +1,65 @@
+from nltk.probability import FreqDist
+
+text1="India will play against Australia. This will be a exciting seriers"
+
+print(text1)
+
+pip install nltk
+
+import nltk
+
+word_tokens=nltk.word_tokenize(text1)
+
+print(word_tokens)
+
+text1=FreqDist(word_tokens)
+
+print(text1)
+
+text1.most_common(10)
+
+text1.freq("India")
+
+import matplotlib.pyplot as plt
+fig, ax=plt.subplots(figsize=(10,7))
+text1.plot()
+
+from wordcloud import WordCloud, STOPWORDS
+
+stop_w=set(STOPWORDS)
+
+info=("Artificial Intelligence")
+print(info)
+
+word_cloud=WordCloud(stopwords=stop_w).generate(info)
+print(word_cloud)
+
+img=word_cloud.to_image()
+img.show()
+
+
+pip install pyspellchecker
+
+import spellchecker
+
+from spellchecker import SpellChecker
+
+spell=SpellChecker()
+
+text="Artific Intelligence?"
+print(text)
+
+word_tokens=nltk.word_tokenize(text)
+miss=spell.unknown(word_tokens)
+
+for word in miss:
+  print(spell.correction(word))
+
+tokens=[word for word in word_tokens if word.isalpha()]
+print(word_tokens)
+
+tokens=[word for word in word_tokens if not word.isnumeric()]
+print(word_tokens)
+
+tokens=[word.lower() for word in word_tokens]
+print(tokens)
